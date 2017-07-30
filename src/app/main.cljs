@@ -12,7 +12,7 @@
 (defn dispatch! [op op-data]
   (let [next-store (if (= op :states)
                      (update @*store :states (mutate op-data))
-                     (updater @*store op op-data))]
+                     (updater @*store op op-data (.valueOf (new js/Date))))]
     (reset! *store next-store)))
 
 (def mount-target (.querySelector js/document ".app"))

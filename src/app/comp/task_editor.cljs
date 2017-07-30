@@ -13,7 +13,12 @@
 
 (def initial-state {:text "", :id nil, :detail "", :tag-ids {}})
 
-(defn on-edit [state] (fn [e d! m!] (println "Edit!" state)))
+(defn on-edit [state]
+  (fn [e d! m!]
+    (fn [e d! m!]
+      (d! :task/edit state)
+      (d! :router/navigate {:name :task-list})
+      (m! initial-state))))
 
 (defn on-change [k state] (fn [e d! m!] (m! (assoc state k (:value e)))))
 

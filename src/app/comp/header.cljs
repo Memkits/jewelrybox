@@ -31,5 +31,9 @@
  ()
  (div
   {:style style-header}
-  (div {} (render-entry "Tasks" :task-list) (render-entry "Tags" :tag-list))
+  (div
+   {}
+   (render-entry "Tasks" :task-list)
+   (render-entry "Tags" :tag-list)
+   (render-entry "Stats" :stats))
   (div {} (render-entry "Profile" :progile))))

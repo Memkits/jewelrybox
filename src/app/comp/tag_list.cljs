@@ -18,10 +18,10 @@
 
 (defcomp
  comp-tag-list
- ()
+ (tags)
  (div
   {:style style-body}
-  (div {:style style-list})
+  (div {:style style-list} (<> span tags nil))
   (div
    {:style style-actions}
    (span {:inner-text "Create tag", :style style-control, :on {:click on-create}}))))

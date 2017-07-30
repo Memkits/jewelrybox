@@ -17,7 +17,11 @@
 
 (def style-actions (merge ui/row {:width 400, :justify-content :flex-end}))
 
-(defn on-create [state] (fn [e d! m!] (println "Create tag" state)))
+(defn on-edit [state]
+  (fn [e d! m!]
+    (d! :tag/edit state)
+    (d! :router/navigate {:name :tag-list})
+    (m! initial-state)))
 
 (defcomp
  comp-tag-editor
@@ -44,4 +48,4 @@
     (=< nil 8)
     (div
      {:style style-actions}
-     (button {:inner-text "Create", :style style/button, :on {:click (on-create state)}})))))
+     (button {:inner-text "Create", :style style/button, :on {:click (on-edit state)}})))))
