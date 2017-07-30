@@ -4,7 +4,7 @@
             [respo.cursor :refer [mutate]]
             [app.comp.container :refer [comp-container]]
             [cljs.reader :refer [read-string]]
-            [app.updater.core :refer [updater]]
+            [app.updater :refer [updater]]
             [app.schema :as schema]))
 
 (defonce *store (atom schema/store))
