@@ -5,4 +5,4 @@
 
 (def task {:id nil, :text "", :done? false, :details "", :tag-ids #{}})
 
-(def tag {:id nil, :name "", :hidden? false})
+(def tag {:id nil, :name "", :detail "", :hidden? false})

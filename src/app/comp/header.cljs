@@ -10,7 +10,7 @@
   (merge
    ui/row
    {:font-size 24,
-    :border-bottom (str "1px solid " (hsl 0 0 80)),
+    :border-bottom (str "1px solid " (hsl 0 0 100 0.7)),
     :padding "0 16px",
     :font-family "Josefin Sans",
     :font-weight 100,
@@ -19,7 +19,12 @@
 
 (def style-entry {:margin-right 16})
 
-(defn render-entry [entry-name entry-id] (<> span entry-name style-entry))
+(defn on-navigate [entry-id]
+  (fn [e d! m!] (d! :router/navigate {:name entry-id, :data nil})))
+
+(defn render-entry [entry-name entry-id]
+  (<> span entry-name style-entry)
+  (span {:inner-text entry-name, :style style-entry, :on {:click (on-navigate entry-id)}}))
 
 (defcomp
  comp-header
