@@ -4,7 +4,8 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.style :as ui]
             [respo.core :refer [create-comp]]
-            [respo.comp.space :refer [=<]]))
+            [respo.comp.space :refer [=<]]
+            [app.comp.tag-item :refer [comp-tag-item]]))
 
 (def style-body (merge ui/row ui/flex {:padding "8px 16px"}))
 
@@ -21,7 +22,11 @@
  (tags)
  (div
   {:style style-body}
-  (div {:style style-list} (<> span tags nil))
+  (div
+   {:style style-list}
+   (->> tags
+        (map (fn [entry] (let [k (key entry), tag (val entry)] [k (comp-tag-item tag)])))))
+  (=< 16 nil)
   (div
    {:style style-actions}
    (span {:inner-text "Create tag", :style style-control, :on {:click on-create}}))))
