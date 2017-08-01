@@ -4,7 +4,8 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.style :as ui]
             [respo.core :refer [create-comp]]
-            [respo.comp.space :refer [=<]]))
+            [respo.comp.space :refer [=<]]
+            [app.comp.task-item :refer [comp-task-item]]))
 
 (def style-body (merge ui/flex ui/row {:padding "8px 16px"}))
 
@@ -18,10 +19,13 @@
 
 (defcomp
  comp-task-list
- ()
+ (tasks)
  (div
   {:style style-body}
-  (div {:style style-list} (<> span "Tasks list" nil))
+  (div
+   {:style style-list}
+   (->> tasks (map (fn [entry] (let [[k task] entry] [k (comp-task-item task)])))))
+  (=< 16 nil)
   (div
    {:style style-actions}
    (span {:inner-text "Create task", :style style-control, :on {:click on-create}}))))

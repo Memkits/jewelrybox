@@ -23,16 +23,19 @@
 (defcomp
  comp-container
  (store)
- (let [router (:router store), states (:states store)]
+ (let [router (:router store)
+       states (:states store)
+       tags (:tags store)
+       tasks (:tasks store)]
    (div
     {:style style-app}
     (comp-header)
     (case (:name router)
-      :task-list (comp-task-list)
-      :task-detail (comp-task-detail)
+      :task-list (comp-task-list tasks)
+      :task-detail (comp-task-detail (get tasks (:data router)))
       :task-editor (cursor-> :task-editor comp-task-editor states)
-      :tag-list (comp-tag-list (:tags store))
-      :tag-detail (comp-tag-detail)
+      :tag-list (comp-tag-list tags)
+      :tag-detail (comp-tag-detail (get tags (:data router)))
       :tag-editor (cursor-> :tag-editor comp-tag-editor states)
       :stats (comp-stats store)
       (comp-missing router))

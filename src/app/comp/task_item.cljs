@@ -1,5 +1,5 @@
 
-(ns app.comp.tag-item
+(ns app.comp.task-item
   (:require-macros [respo.macros :refer [defcomp <> div button span]])
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
@@ -8,20 +8,20 @@
             [respo.comp.space :refer [=<]]
             [app.comp.empty :refer [comp-empty]]))
 
-(def style-tag
+(def style-task
   {:border (str "1px solid " (hsl 0 0 100 0.5)),
+   :margin-bottom 16,
    :padding "8px 16px",
-   :margin-bottom 15,
    :cursor :pointer})
 
-(defn on-click [tag]
-  (fn [e d! m!] (d! :router/navigate {:name :tag-detail, :data (:id tag)})))
+(defn on-click [task]
+  (fn [e d! m!] (d! :router/navigate {:name :task-detail, :data (:id task)})))
 
 (defcomp
- comp-tag-item
- (tag)
- (let [text (:name tag), detail (:detail tag)]
+ comp-task-item
+ (task)
+ (let [text (:text task), detail (:detail task)]
    (div
-    {:style style-tag, :on {:click (on-click tag)}}
+    {:style style-task, :on {:click (on-click task)}}
     (div {} (if (string/blank? text) (comp-empty) (<> span text nil)))
-    (div {} (if (string/blank? detail) (comp-empty) (<> span (:detail tag) nil))))))
+    (div {} (if (string/blank? detail) (comp-empty) (<> span detail nil))))))

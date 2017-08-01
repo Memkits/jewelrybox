@@ -6,4 +6,12 @@
             [respo.core :refer [create-comp]]
             [respo.comp.space :refer [=<]]))
 
-(defcomp comp-task-detail () (div {} (<> span "Task detail" nil)))
+(def style-body (merge ui/flex {:padding "8px 16px"}))
+
+(defcomp
+ comp-task-detail
+ (task)
+ (div
+  {:style style-body}
+  (div {} (<> span (:text task) nil))
+  (div {} (<> span (:detail task) nil))))

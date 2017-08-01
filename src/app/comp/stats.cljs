@@ -8,4 +8,10 @@
 
 (def style-body (merge ui/flex {:padding "8px 16px"}))
 
-(defcomp comp-stats (store) (div {:style style-body} (<> span "stats" nil)))
+(defcomp
+ comp-stats
+ (store)
+ (div
+  {:style style-body}
+  (div {} (<> span (str "Tasks: " (count (:tasks store))) nil))
+  (div {} (<> span (str "Tags: " (count (:tags store))) nil))))
