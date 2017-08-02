@@ -17,7 +17,7 @@
     :justify-content :space-between,
     :cursor :pointer}))
 
-(def style-entry {:margin-right 16})
+(def style-entry {})
 
 (defn on-navigate [entry-id]
   (fn [e d! m!] (d! :router/navigate {:name entry-id, :data nil})))
@@ -34,6 +34,9 @@
   (div
    {}
    (render-entry "Tasks" :task-list)
+   (=< 32 0)
    (render-entry "Tags" :tag-list)
-   (render-entry "Stats" :stats))
+   (=< 32 0)
+   (render-entry "Stats" :stats)
+   (=< 32 0))
   (div {} (render-entry "Profile" :progile))))

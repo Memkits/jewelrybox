@@ -10,9 +10,11 @@
 (defonce *store (atom schema/store))
 
 (defn dispatch! [op op-data]
-  (let [next-store (if (= op :states)
+  (let [now (.valueOf (js/Date.))
+        id (str now)
+        next-store (if (= op :states)
                      (update @*store :states (mutate op-data))
-                     (updater @*store op op-data (.valueOf (new js/Date))))]
+                     (updater @*store op op-data id now))]
     (reset! *store next-store)))
 
 (def mount-target (.querySelector js/document ".app"))

@@ -35,10 +35,10 @@
     (div
      {:style style-body}
      (case (:name router)
-       :task-list (comp-task-list tasks)
+       :task-list (cursor-> :task-list comp-task-list states tasks)
        :task-detail (comp-task-detail (get tasks (:data router)))
        :task-editor (cursor-> :task-editor comp-task-editor states)
-       :tag-list (comp-tag-list tags)
+       :tag-list (cursor-> :task-list comp-tag-list states tags)
        :tag-detail (comp-tag-detail (get tags (:data router)))
        :tag-editor (cursor-> :tag-editor comp-tag-editor states)
        :stats (comp-stats store)

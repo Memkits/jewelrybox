@@ -6,6 +6,7 @@
             [respo-ui.style :as ui]
             [respo.core :refer [create-comp]]
             [respo.comp.space :refer [=<]]
+            [respo.comp.inspect :refer [comp-inspect]]
             [app.comp.empty :refer [comp-empty]]))
 
 (def style-tag
