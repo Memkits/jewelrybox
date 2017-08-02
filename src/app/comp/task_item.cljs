@@ -9,7 +9,7 @@
             [app.comp.empty :refer [comp-empty]]))
 
 (def style-task
-  {:border (str "1px solid " (hsl 0 0 100 0.5)),
+  {:border (str "1px solid " (hsl 0 0 90)),
    :margin-bottom 16,
    :padding "8px 16px",
    :cursor :pointer})

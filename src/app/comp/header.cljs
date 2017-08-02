@@ -9,8 +9,8 @@
 (def style-header
   (merge
    ui/row
-   {:font-size 24,
-    :border-bottom (str "1px solid " (hsl 0 0 100 0.7)),
+   {:font-size 16,
+    :border-bottom (str "1px solid " (hsl 0 0 90)),
     :padding "0 16px",
     :font-family "Josefin Sans",
     :font-weight 100,

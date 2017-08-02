@@ -9,7 +9,7 @@
             [app.comp.empty :refer [comp-empty]]))
 
 (def style-tag
-  {:border (str "1px solid " (hsl 0 0 100 0.5)),
+  {:border (str "1px solid " (hsl 0 0 90)),
    :padding "8px 16px",
    :margin-bottom 15,
    :cursor :pointer})

@@ -7,7 +7,7 @@
             [respo.comp.space :refer [=<]]
             [app.style :as style]))
 
-(def style-body (merge ui/flex {:padding "8px 16px"}))
+(def style-body (merge))
 
 (def style-actions (merge ui/row {:justify-content :flex-end, :width 400}))
 

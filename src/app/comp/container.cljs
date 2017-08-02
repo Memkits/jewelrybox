@@ -16,9 +16,11 @@
             [app.comp.tag-editor :refer [comp-tag-editor]]
             [app.comp.stats :refer [comp-stats]]))
 
-(def style-app (merge ui/global ui/column ui/fullscreen {:color :white}))
+(def style-app (merge ui/global ui/column ui/fullscreen))
 
 (def style-inspect {:bottom 8})
+
+(def style-body (merge ui/flex {:padding "40px 16px", :overflow :auto}))
 
 (defcomp
  comp-container
@@ -30,13 +32,15 @@
    (div
     {:style style-app}
     (comp-header)
-    (case (:name router)
-      :task-list (comp-task-list tasks)
-      :task-detail (comp-task-detail (get tasks (:data router)))
-      :task-editor (cursor-> :task-editor comp-task-editor states)
-      :tag-list (comp-tag-list tags)
-      :tag-detail (comp-tag-detail (get tags (:data router)))
-      :tag-editor (cursor-> :tag-editor comp-tag-editor states)
-      :stats (comp-stats store)
-      (comp-missing router))
+    (div
+     {:style style-body}
+     (case (:name router)
+       :task-list (comp-task-list tasks)
+       :task-detail (comp-task-detail (get tasks (:data router)))
+       :task-editor (cursor-> :task-editor comp-task-editor states)
+       :tag-list (comp-tag-list tags)
+       :tag-detail (comp-tag-detail (get tags (:data router)))
+       :tag-editor (cursor-> :tag-editor comp-tag-editor states)
+       :stats (comp-stats store)
+       (comp-missing router)))
     (comp-inspect "Store" store style-inspect))))

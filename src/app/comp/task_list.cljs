@@ -7,7 +7,7 @@
             [respo.comp.space :refer [=<]]
             [app.comp.task-item :refer [comp-task-item]]))
 
-(def style-body (merge ui/flex ui/row {:padding "8px 16px"}))
+(def style-body (merge ui/row))
 
 (def style-list (merge ui/flex {}))
 

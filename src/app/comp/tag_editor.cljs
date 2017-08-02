@@ -7,7 +7,7 @@
             [respo.comp.space :refer [=<]]
             [app.style :as style]))
 
-(def style-body (merge ui/flex {:padding "8px 16px"}))
+(def style-body (merge))
 
 (def style-title {:font-family "Josefin Sans", :font-weight 100, :font-size 40})
 

@@ -6,7 +6,7 @@
             [respo.core :refer [create-comp]]
             [respo.comp.space :refer [=<]]))
 
-(def style-body (merge ui/flex {:padding "8px 16px"}))
+(def style-body (merge))
 
 (defcomp
  comp-stats
