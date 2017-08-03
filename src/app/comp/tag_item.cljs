@@ -9,14 +9,12 @@
             [respo.comp.inspect :refer [comp-inspect]]))
 
 (def style-tag
-  {:border (str "1px solid " (hsl 0 0 90)),
-   :padding "8px 16px",
-   :margin-bottom 15,
-   :cursor :pointer})
+  {:border (str "1px solid " (hsl 0 0 90)), :padding 8, :margin-bottom 15, :cursor :pointer})
 
 (def style-text (merge ui/input {:min-width 400, :background-color :transparent}))
 
-(def style-detail (merge ui/input {:min-width 400, :background-color :transparent}))
+(def style-detail
+  (merge ui/input {:min-width 400, :background-color :transparent, :color (hsl 0 0 60)}))
 
 (defn on-edit [task-id k] (fn [e d! m!] (d! :tag/edit (assoc {:id task-id} k (:value e)))))
 
@@ -32,7 +30,6 @@
      :placeholder "Tag name",
      :style style-text,
      :on {:input (on-edit (:id tag) :name)}}))
-  (=< nil 8)
   (div
    {}
    (input

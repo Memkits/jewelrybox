@@ -13,18 +13,21 @@
     :border-bottom (str "1px solid " (hsl 0 0 90)),
     :padding "0 16px",
     :font-family "Josefin Sans",
-    :font-weight 100,
     :justify-content :space-between,
     :cursor :pointer}))
 
-(def style-entry {})
+(def style-entry {:display :inline-block, :line-height "40px", :padding "0 8px"})
 
 (defn on-navigate [entry-id]
   (fn [e d! m!] (d! :router/navigate {:name entry-id, :data nil})))
 
 (defn render-entry [entry-name entry-id]
   (<> span entry-name style-entry)
-  (span {:inner-text entry-name, :style style-entry, :on {:click (on-navigate entry-id)}}))
+  (span
+   {:class-name "nav-entry",
+    :inner-text entry-name,
+    :style style-entry,
+    :on {:click (on-navigate entry-id)}}))
 
 (defcomp
  comp-header
@@ -34,9 +37,9 @@
   (div
    {}
    (render-entry "Tasks" :task-list)
-   (=< 32 0)
+   (=< 20 0)
    (render-entry "Tags" :tag-list)
-   (=< 32 0)
+   (=< 20 0)
    (render-entry "Stats" :stats)
-   (=< 32 0))
+   (=< 20 0))
   (div {} (render-entry "Profile" :progile))))

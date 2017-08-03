@@ -12,4 +12,5 @@
     :tag/quick-create (tag/quick-create store op-data op-id op-time)
     :task/edit (task/edit store op-data op-id op-time)
     :task/quick-create (task/quick-create store op-data op-id op-time)
+    :task/remove-task (task/remove-task store op-data op-id op-time)
     (do (println "Unhandled action:" op) store)))

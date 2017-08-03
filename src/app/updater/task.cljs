@@ -18,3 +18,6 @@
    (merge
     schema/task
     {:id op-id, :text op-data, :created-time op-time, :updated-time op-time})))
+
+(defn remove-task [store op-data op-id op-time]
+  (update store :tasks (fn [tasks] (dissoc tasks op-data))))
