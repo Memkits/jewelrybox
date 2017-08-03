@@ -13,9 +13,7 @@
 
 (def style-list (merge ui/flex {}))
 
-(def style-control {:font-family "Josefin Sans", :cursor :pointer})
-
-(def style-actions (merge ui/flex {}))
+(def style-actions (merge ui/flex ui/row-center {:justify-content :flex-start}))
 
 (defn on-create [e d! m!] (d! :router/navigate {:name :tag-editor, :data nil}))
 
@@ -25,6 +23,8 @@
   (fn [e d! m!]
     (if (and (not (string/blank? state)) (= 13 (:key-code e)))
       (do (d! :tag/quick-create state) (m! "")))))
+
+(def style-advanced {:cursor :pointer, :font-size 14, :color (hsl 0 0 0 0.4)})
 
 (defcomp
  comp-tag-list
@@ -40,7 +40,7 @@
        :style style/input,
        :on {:input on-input, :keydown (on-keydown state)}})
      (=< 8 nil)
-     (span {:inner-text "Create tag", :style style-control, :on {:click on-create}}))
+     (span {:inner-text "Advanced", :style style-advanced, :on {:click on-create}}))
     (=< nil 16)
     (div
      {:style style-list}

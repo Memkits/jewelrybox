@@ -1,6 +1,6 @@
 
 (ns app.comp.task-item
-  (:require-macros [respo.macros :refer [defcomp <> div button span]])
+  (:require-macros [respo.macros :refer [defcomp <> div button span input textarea]])
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
             [respo-ui.style :as ui]
@@ -14,14 +14,33 @@
    :padding "8px 16px",
    :cursor :pointer})
 
-(defn on-click [task]
-  (fn [e d! m!] (d! :router/navigate {:name :task-detail, :data (:id task)})))
+(def style-text (merge ui/input {:min-width 400, :background-color :transparent}))
+
+(def style-detail (merge ui/input {:min-width 400, :background-color :transparent}))
+
+(defn on-edit [task-id k] (fn [e d! m!] (d! :task/edit (assoc {:id task-id} k (:value e)))))
 
 (defcomp
  comp-task-item
  (task)
  (let [text (:text task), detail (:detail task)]
    (div
-    {:style style-task, :on {:click (on-click task)}}
-    (div {} (if (string/blank? text) (comp-empty) (<> span text nil)))
-    (div {} (if (string/blank? detail) (comp-empty) (<> span detail nil))))))
+    {:style style-task}
+    (div
+     {}
+     (input
+      {:value (:text task),
+       :placeholder "Task text",
+       :style style-text,
+       :on {:input (on-edit (:id task) :text)}}))
+    (=< nil 8)
+    (div
+     {}
+     (input
+      {:value (:detail task),
+       :placeholder "Task detail",
+       :style style-detail,
+       :on {:input (on-edit (:id task) :detail)}})))))
+
+(defn on-click [task]
+  (fn [e d! m!] (d! :router/navigate {:name :task-detail, :data (:id task)})))
