@@ -15,3 +15,6 @@
    store
    [:tags op-id]
    (merge schema/tag {:name op-data, :created-time op-time, :id op-id})))
+
+(defn remove-tag [store op-data op-id op-time]
+  (update store :tags (fn [tags] (dissoc tags op-data))))

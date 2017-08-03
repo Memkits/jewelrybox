@@ -10,6 +10,7 @@
     :router/navigate (router/navigate store op-data op-id)
     :tag/edit (tag/edit store op-data op-id op-time)
     :tag/quick-create (tag/quick-create store op-data op-id op-time)
+    :tag/remove-tag (tag/remove-tag store op-data op-id op-time)
     :task/edit (task/edit store op-data op-id op-time)
     :task/quick-create (task/quick-create store op-data op-id op-time)
     :task/remove-task (task/remove-task store op-data op-id op-time)

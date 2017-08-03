@@ -1,6 +1,6 @@
 
 (ns app.comp.task-list
-  (:require-macros [respo.macros :refer [defcomp <> div button span input]])
+  (:require-macros [respo.macros :refer [defcomp cursor-> <> div button span input]])
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
             [respo-ui.style :as ui]
@@ -29,7 +29,7 @@
 
 (defcomp
  comp-task-list
- (states tasks)
+ (states tasks tags)
  (let [state (or (:data states) "")]
    (div
     {:style style-body}
@@ -46,4 +46,6 @@
      {:style style-list}
      (->> tasks
           (sort-by (fn [entry] (let [[k task] entry] (- (:created-time task)))))
-          (map (fn [entry] (let [[k task] entry] [k (comp-task-item task)]))))))))
+          (map
+           (fn [entry]
+             (let [[k task] entry] [k (cursor-> k comp-task-item states task tags)]))))))))

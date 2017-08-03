@@ -1,12 +1,13 @@
 
 (ns app.comp.task-item
-  (:require-macros [respo.macros :refer [defcomp <> div button span input textarea]])
+  (:require-macros [respo.macros :refer [defcomp cursor-> <> div button span input textarea]])
   (:require [hsl.core :refer [hsl]]
             [clojure.string :as string]
             [respo-ui.style :as ui]
             [respo.core :refer [create-comp]]
             [respo.comp.space :refer [=<]]
-            [app.comp.empty :refer [comp-empty]]))
+            [app.comp.empty :refer [comp-empty]]
+            [app.comp.tag-selector :refer [comp-tag-selector]]))
 
 (def style-task
   {:border (str "1px solid " (hsl 0 0 90)),
@@ -32,7 +33,7 @@
 
 (defcomp
  comp-task-item
- (task)
+ (states task tags)
  (let [text (:text task), detail (:detail task), task-id (:id task)]
    (div
     {:class-name "task-item", :style style-task}
@@ -43,6 +44,7 @@
        :placeholder "Task text",
        :style style-text,
        :on {:input (on-edit (:id task) :text)}}))
+    (cursor-> :selector comp-tag-selector states tags)
     (div
      {}
      (input

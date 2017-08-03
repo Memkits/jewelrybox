@@ -35,7 +35,7 @@
     (div
      {:style style-body}
      (case (:name router)
-       :task-list (cursor-> :task-list comp-task-list states tasks)
+       :task-list (cursor-> :task-list comp-task-list states tasks tags)
        :task-detail (comp-task-detail (get tasks (:data router)))
        :task-editor (cursor-> :task-editor comp-task-editor states)
        :tag-list (cursor-> :task-list comp-tag-list states tags)

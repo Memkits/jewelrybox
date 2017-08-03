@@ -8,15 +8,25 @@
             [respo.comp.space :refer [=<]]
             [respo.comp.inspect :refer [comp-inspect]]))
 
-(def style-tag
-  {:border (str "1px solid " (hsl 0 0 90)), :padding 8, :margin-bottom 15, :cursor :pointer})
-
-(def style-text (merge ui/input {:min-width 400, :background-color :transparent}))
+(def style-controls {:position :absolute, :top 8, :right 8})
 
 (def style-detail
   (merge ui/input {:min-width 400, :background-color :transparent, :color (hsl 0 0 60)}))
 
+(def style-link {:font-size 12, :color (hsl 240 80 80)})
+
+(def style-text (merge ui/input {:min-width 400, :background-color :transparent}))
+
 (defn on-edit [task-id k] (fn [e d! m!] (d! :tag/edit (assoc {:id task-id} k (:value e)))))
+
+(defn on-remove [tag-id] (fn [e d! m!] (d! :tag/remove-tag tag-id)))
+
+(def style-tag
+  {:border (str "1px solid " (hsl 0 0 90)),
+   :padding 8,
+   :margin-bottom 15,
+   :cursor :pointer,
+   :position :relative})
 
 (defcomp
  comp-tag-item
@@ -36,7 +46,10 @@
     {:value (:detail tag),
      :placeholder "Tag detail",
      :style style-detail,
-     :on {:input (on-edit (:id tag) :detail)}}))))
+     :on {:input (on-edit (:id tag) :detail)}}))
+  (div
+   {:style style-controls}
+   (span {:style style-link, :inner-text "Remove", :on {:click (on-remove (:id tag))}}))))
 
 (defn on-click [tag]
   (fn [e d! m!] (d! :router/navigate {:name :tag-detail, :data (:id tag)})))
