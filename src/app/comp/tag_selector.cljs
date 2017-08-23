@@ -10,39 +10,36 @@
 
 (defn on-input [state] (fn [e d! m!] (m! (assoc state :query (:value e)))))
 
-(def style-input (merge ui/input {:width 120, :background-color :transparent}))
-
-(def style-tag
-  {:margin-right 8,
-   :padding "0 8px",
-   :background-color (hsl 240 70 86),
-   :border-radius "4px",
-   :color :white,
-   :line-height "32px"})
-
-(def style-line {:display :inline-block})
-
 (def inital-state {:query "", :searching? false})
+
+(def style-menu
+  {:position :absolute, :border (str "1px solid " (hsl 0 0 90)), :background-color :white})
+
+(def style-input (merge ui/input {:width 120, :background-color :transparent}))
 
 (defn on-focus [state] (fn [e d! m!] (m! (assoc state :searching? true))))
 
+(def style-selector {:position :relative})
+
 (defn on-blur [state] (fn [e d! m!] (m! (assoc state :searching? false))))
+
+(def style-tag {:padding "0 8px", :line-height "24px"})
 
 (defcomp
  comp-tag-selector
  (states tags)
  (let [state (or (:data states) inital-state)]
    (div
-    {}
+    {:style style-selector}
     (input
      {:value (:query state),
       :placeholder "Filter tags",
       :style style-input,
       :on {:input (on-input state), :focus (on-focus state), :blur (on-blur state)}})
     (=< 8 nil)
-    (if (:searching? state)
+    (if (or true (:searching? state))
       (div
-       {:style style-line}
+       {:style style-menu}
        (->> tags
             (filter
              (fn [entry]
@@ -53,4 +50,4 @@
             (take 5)
             (map
              (fn [entry]
-               [(key entry) (span {:inner-text (:name (val entry)), :style style-tag})]))))))))
+               [(key entry) (div {:inner-text (:name (val entry)), :style style-tag})]))))))))

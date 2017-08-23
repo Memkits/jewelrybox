@@ -6,7 +6,7 @@
             [app.schema :as schema]))
 
 (def base-info
-  {:title "CoWorkflow", :icon "http://logo.mvc-works.org/mvc.png", :ssr nil, :inner-html nil})
+  {:title "Jewelrybox", :icon "http://logo.mvc-works.org/mvc.png", :ssr nil, :inner-html nil})
 
 (defn dev-page []
   (make-page
