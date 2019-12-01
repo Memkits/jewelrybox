@@ -8,20 +8,20 @@
             [respo.comp.space :refer [=<]]
             [app.style :as style]))
 
+(def inital-state {:query "", :searching? false})
+
+(defn on-blur [state] (fn [e d! m!] (m! (assoc state :searching? false))))
+
+(defn on-focus [state] (fn [e d! m!] (m! (assoc state :searching? true))))
+
 (defn on-input [state] (fn [e d! m!] (m! (assoc state :query (:value e)))))
 
-(def inital-state {:query "", :searching? false})
+(def style-input (merge ui/input {:width 120, :background-color :transparent}))
 
 (def style-menu
   {:position :absolute, :border (str "1px solid " (hsl 0 0 90)), :background-color :white})
 
-(def style-input (merge ui/input {:width 120, :background-color :transparent}))
-
-(defn on-focus [state] (fn [e d! m!] (m! (assoc state :searching? true))))
-
 (def style-selector {:position :relative})
-
-(defn on-blur [state] (fn [e d! m!] (m! (assoc state :searching? false))))
 
 (def style-tag {:padding "0 8px", :line-height "24px"})
 

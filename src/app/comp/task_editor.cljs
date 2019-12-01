@@ -7,11 +7,9 @@
             [respo.comp.space :refer [=<]]
             [app.style :as style]))
 
-(def style-body (merge))
-
-(def style-actions (merge ui/row {:justify-content :flex-end, :width 400}))
-
 (def initial-state {:text "", :id nil, :detail "", :tag-ids {}})
+
+(defn on-change [k state] (fn [e d! m!] (m! (assoc state k (:value e)))))
 
 (defn on-edit [state]
   (fn [e d! m!]
@@ -19,7 +17,9 @@
     (d! :router/navigate {:name :task-list})
     (m! initial-state)))
 
-(defn on-change [k state] (fn [e d! m!] (m! (assoc state k (:value e)))))
+(def style-actions (merge ui/row {:justify-content :flex-end, :width 400}))
+
+(def style-body (merge))
 
 (defcomp
  comp-task-editor

@@ -21,8 +21,6 @@
 
 (defn render-app! [renderer] (renderer mount-target (comp-container @*store) dispatch!))
 
-(defn reload! [] (clear-cache!) (render-app! render!) (println "Code updated."))
-
 (def ssr? (some? (js/document.querySelector "meta.respo-ssr")))
 
 (defn main! []
@@ -30,5 +28,7 @@
   (render-app! render!)
   (add-watch *store :changes (fn [] (render-app! render!)))
   (println "App started."))
+
+(defn reload! [] (clear-cache!) (render-app! render!) (println "Code updated."))
 
 (set! (.-onload js/window) main!)

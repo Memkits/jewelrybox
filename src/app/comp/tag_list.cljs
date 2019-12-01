@@ -9,12 +9,6 @@
             [app.comp.tag-item :refer [comp-tag-item]]
             [app.style :as style]))
 
-(def style-body (merge))
-
-(def style-list (merge ui/flex {}))
-
-(def style-actions (merge ui/flex ui/row-center {:justify-content :flex-start}))
-
 (defn on-create [e d! m!] (d! :router/navigate {:name :tag-editor, :data nil}))
 
 (defn on-input [e d! m!] (m! (:value e)))
@@ -24,7 +18,13 @@
     (if (and (not (string/blank? state)) (= 13 (:key-code e)))
       (do (d! :tag/quick-create state) (m! "")))))
 
+(def style-actions (merge ui/flex ui/row-center {:justify-content :flex-start}))
+
 (def style-advanced {:cursor :pointer, :font-size 14, :color (hsl 0 0 0 0.4)})
+
+(def style-body (merge))
+
+(def style-list (merge ui/flex {}))
 
 (defcomp
  comp-tag-list

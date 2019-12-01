@@ -6,9 +6,9 @@
             [respo.core :refer [create-comp]]
             [respo.comp.space :refer [=<]]))
 
-(def style-missing {:padding "8px 16px"})
-
 (def style-huge {:font-size 40, :font-weight 100, :font-family "Josefin Sans"})
+
+(def style-missing {:padding "8px 16px"})
 
 (defcomp
  comp-missing

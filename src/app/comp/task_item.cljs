@@ -9,27 +9,27 @@
             [app.comp.empty :refer [comp-empty]]
             [app.comp.tag-selector :refer [comp-tag-selector]]))
 
-(def style-task
-  {:border (str "1px solid " (hsl 0 0 90)),
-   :margin-bottom 16,
-   :padding 8,
-   :position :relative})
-
-(def style-toolbar {:position :absolute, :top 6, :right 6})
+(defn on-edit [task-id k] (fn [e d! m!] (d! :task/edit (assoc {:id task-id} k (:value e)))))
 
 (defn on-navigate [task-id]
   (fn [e d! m!] (d! :router/navigate {:name :task-detail, :data task-id})))
+
+(defn on-remove [task-id] (fn [e d! m!] (d! :task/remove-task task-id)))
 
 (def style-detail
   (merge ui/input {:min-width 400, :background-color :transparent, :color (hsl 0 0 60)}))
 
 (def style-link {:font-size 12, :color (hsl 240 80 80), :cursor :pointer})
 
+(def style-task
+  {:border (str "1px solid " (hsl 0 0 90)),
+   :margin-bottom 16,
+   :padding 8,
+   :position :relative})
+
 (def style-text (merge ui/input {:min-width 400, :background-color :transparent}))
 
-(defn on-edit [task-id k] (fn [e d! m!] (d! :task/edit (assoc {:id task-id} k (:value e)))))
-
-(defn on-remove [task-id] (fn [e d! m!] (d! :task/remove-task task-id)))
+(def style-toolbar {:position :absolute, :top 6, :right 6})
 
 (defcomp
  comp-task-item

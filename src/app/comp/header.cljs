@@ -6,6 +6,19 @@
             [respo.core :refer [create-comp]]
             [respo.comp.space :refer [=<]]))
 
+(defn on-navigate [entry-id]
+  (fn [e d! m!] (d! :router/navigate {:name entry-id, :data nil})))
+
+(def style-entry {:display :inline-block, :line-height "40px", :padding "0 8px"})
+
+(defn render-entry [entry-name entry-id]
+  (<> span entry-name style-entry)
+  (span
+   {:class-name "nav-entry",
+    :inner-text entry-name,
+    :style style-entry,
+    :on {:click (on-navigate entry-id)}}))
+
 (def style-header
   (merge
    ui/row
@@ -15,19 +28,6 @@
     :font-family "Josefin Sans",
     :justify-content :space-between,
     :cursor :pointer}))
-
-(def style-entry {:display :inline-block, :line-height "40px", :padding "0 8px"})
-
-(defn on-navigate [entry-id]
-  (fn [e d! m!] (d! :router/navigate {:name entry-id, :data nil})))
-
-(defn render-entry [entry-name entry-id]
-  (<> span entry-name style-entry)
-  (span
-   {:class-name "nav-entry",
-    :inner-text entry-name,
-    :style style-entry,
-    :on {:click (on-navigate entry-id)}}))
 
 (defcomp
  comp-header

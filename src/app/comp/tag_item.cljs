@@ -8,6 +8,10 @@
             [respo.comp.space :refer [=<]]
             [respo.comp.inspect :refer [comp-inspect]]))
 
+(defn on-edit [task-id k] (fn [e d! m!] (d! :tag/edit (assoc {:id task-id} k (:value e)))))
+
+(defn on-remove [tag-id] (fn [e d! m!] (d! :tag/remove-tag tag-id)))
+
 (def style-controls {:position :absolute, :top 8, :right 8})
 
 (def style-detail
@@ -15,18 +19,14 @@
 
 (def style-link {:font-size 12, :color (hsl 240 80 80)})
 
-(def style-text (merge ui/input {:min-width 400, :background-color :transparent}))
-
-(defn on-edit [task-id k] (fn [e d! m!] (d! :tag/edit (assoc {:id task-id} k (:value e)))))
-
-(defn on-remove [tag-id] (fn [e d! m!] (d! :tag/remove-tag tag-id)))
-
 (def style-tag
   {:border (str "1px solid " (hsl 0 0 90)),
    :padding 8,
    :margin-bottom 15,
    :cursor :pointer,
    :position :relative})
+
+(def style-text (merge ui/input {:min-width 400, :background-color :transparent}))
 
 (defcomp
  comp-tag-item

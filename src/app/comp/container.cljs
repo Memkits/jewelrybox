@@ -18,9 +18,9 @@
 
 (def style-app (merge ui/global ui/column ui/fullscreen))
 
-(def style-inspect {:bottom 8})
-
 (def style-body (merge ui/flex {:padding "40px 16px", :overflow :auto}))
+
+(def style-inspect {:bottom 8})
 
 (defcomp
  comp-container

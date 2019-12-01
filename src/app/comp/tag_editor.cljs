@@ -7,21 +7,21 @@
             [respo.comp.space :refer [=<]]
             [app.style :as style]))
 
-(def style-body (merge))
-
-(def style-title {:font-family "Josefin Sans", :font-weight 100, :font-size 40})
-
 (def initial-state {:id nil, :name "", :hidden? false, :detail ""})
 
 (defn on-change [k state] (fn [e d! m!] (m! (assoc state k (:value e)))))
-
-(def style-actions (merge ui/row {:width 400, :justify-content :flex-end}))
 
 (defn on-edit [state]
   (fn [e d! m!]
     (d! :tag/edit state)
     (d! :router/navigate {:name :tag-list})
     (m! initial-state)))
+
+(def style-actions (merge ui/row {:width 400, :justify-content :flex-end}))
+
+(def style-body (merge))
+
+(def style-title {:font-family "Josefin Sans", :font-weight 100, :font-size 40})
 
 (defcomp
  comp-tag-editor
